@@ -362,6 +362,83 @@ export interface AdminTransferTokenPermission extends Schema.CollectionType {
   };
 }
 
+export interface ApiArticuloArticulo extends Schema.CollectionType {
+  collectionName: 'articulos';
+  info: {
+    singularName: 'articulo';
+    pluralName: 'articulos';
+    displayName: 'Articulo';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    titulo: Attribute.String & Attribute.Required;
+    contenido: Attribute.Text & Attribute.Required;
+    autor: Attribute.String;
+    fecha_publicacion: Attribute.Date & Attribute.Required;
+    imagen_cabecera: Attribute.Media;
+    categorias: Attribute.Relation<
+      'api::articulo.articulo',
+      'manyToMany',
+      'api::categoria.categoria'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::articulo.articulo',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::articulo.articulo',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiCategoriaCategoria extends Schema.CollectionType {
+  collectionName: 'categorias';
+  info: {
+    singularName: 'categoria';
+    pluralName: 'categorias';
+    displayName: 'Categoria';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    nombre: Attribute.String & Attribute.Required;
+    descripcion: Attribute.Text;
+    imagen_cabecera: Attribute.Media;
+    articulos: Attribute.Relation<
+      'api::categoria.categoria',
+      'manyToMany',
+      'api::articulo.articulo'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::categoria.categoria',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::categoria.categoria',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface PluginUploadFile extends Schema.CollectionType {
   collectionName: 'files';
   info: {
@@ -798,6 +875,8 @@ declare module '@strapi/types' {
       'admin::api-token-permission': AdminApiTokenPermission;
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
+      'api::articulo.articulo': ApiArticuloArticulo;
+      'api::categoria.categoria': ApiCategoriaCategoria;
       'plugin::upload.file': PluginUploadFile;
       'plugin::upload.folder': PluginUploadFolder;
       'plugin::content-releases.release': PluginContentReleasesRelease;

@@ -34,3 +34,4 @@ Lunes 6 de Mayo 11:59 p.m
 - `descripcion`: Text
 - `imagen_cabecera`: Media (permite cargar una imagen que será la cabecera de la categoría)
 
+add new rule gitstream

@@ -30,7 +30,7 @@ automations:
             This PR is missing a Jira ticket reference in the title or description.
             xxx- {{source.diff.files | filter(attr="original_file", regex=r/\.json$/) | dump | safe}}
             xxx- {{source.diff.files | filter(attr='original_file', regex=r/\.json$/) | map(attr='diff') | dump | safe}}
-            xxx- {{source.diff.files | filter(attr='original_file', regex=r/\.json$/) | map(attr='diff') | includes(regex=r/\+[\s]*version/) | dump | safe}}
+            xxx- {{source.diff.files | filter(attr='original_file', regex=r/\.json$/) | map(attr='diff') | includes(regex=r/\+[\s]*[\",\']*[\s]*version/) | dump | safe}}
             Please add a Jira ticket reference to the title or description of this PR. {{changes.change_version}} - {{changes.change_version2}} - {{changes.change_readme}}
   # Post a comment that lists the best experts for the files that were modified.
   explain_code_experts:

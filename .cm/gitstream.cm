@@ -90,4 +90,4 @@ changes:
   #change_version3: {{source.diff.files | filter(atri='original_file', regex=r/\.json$|\.md$/) | map(attr='diff') | includes(list=['version'])}}
   change_readme: {{source.diff.files | filter(atri='original_file', regex=r/README\.md/) | map(attr='diff') | includes(list=['version'])}}
   #change_vesion2: {{source.diff.files | filter(atri='original_file', regex=r/README\.md/) | map(attr='diff')}}
-  change_version: {{source.diff.files | filter(atri='original_file', regex=r/pakage\.json/) | map(attr='diff') | includes(list=['version'])}}
+  change_version: {{source.diff.files | filter(attr='original_file', regex=r/\.json$/) | map(attr='diff') | includes(regex=r/\+[\s]*[\",\']*[\s]*version/)}}

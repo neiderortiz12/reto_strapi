@@ -28,7 +28,10 @@ automations:
         args:
           comment: |
             This PR is missing a Jira ticket reference in the title or description.
-            Please add a Jira ticket reference to the title or description of this PR.
+            xxx- {{source.diff.files | filter(attr="original_file", regex=r/\.json$/) | dump | safe}}
+            xxx- {{source.diff.files | filter(attr='original_file', regex=r/\.json$/) | map(attr='diff') | dump | safe}}
+            xxx- {{source.diff.files | filter(attr='original_file', regex=r/\.json$/) | map(attr='diff') | includes(regex=r/\+[\s]*[\",\']*[\s]*version/) | dump | safe}}
+            Please add a Jira ticket reference to the title or description of this PR. {{changes.change_version}} - {{changes.change_version2}} - {{changes.change_readme}}
   # Post a comment that lists the best experts for the files that were modified.
   explain_code_experts:
     if:
@@ -40,7 +43,21 @@ automations:
 
   change_version_validation:
     if:
-      - {{ not (changes.changes_version) }}
+      - {{ not (changes.change_version) }}
+    run:
+      - action: add-label@v1
+        args:
+          label: "don't update version"
+          color: {{ colors.red }}
+      - action: add-comment@v1
+        args:
+          comment: |
+            In this PR the version is not updated,
+            Please update version.
+
+  change_version_validation2:
+    if:
+      - {{ not (changes.change_readme) }}
     run:
       - action: add-label@v1
         args:
@@ -70,4 +87,7 @@ colors:
   green: '0e8a16'
 
 changes:
-  change_version: {{source.diff.files | filter(atri='original_file', regex=r/pakage\.json/) | map(atri='diff') | includes(list=['version'])}}
+  #change_version3: {{source.diff.files | filter(atri='original_file', regex=r/\.json$|\.md$/) | map(attr='diff') | includes(list=['version'])}}
+  change_readme: {{source.diff.files | filter(atri='original_file', regex=r/README\.md/) | map(attr='diff') | includes(list=['version'])}}
+  #change_vesion2: {{source.diff.files | filter(atri='original_file', regex=r/README\.md/) | map(attr='diff')}}
+  change_version: {{source.diff.files | filter(attr='original_file', regex=r/\.json$/) | map(attr='diff') | includes(regex=r/\+[\s]*[\",\']*[\s]*version/)}}

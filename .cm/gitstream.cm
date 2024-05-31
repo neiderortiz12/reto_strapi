@@ -27,7 +27,7 @@ automations:
       - action: add-comment@v1
         args:
           comment: |
-            This PR is missing a Jira ticket reference in the title or description.{{source.diff.files | dump | safe}}
+            This PR is missing a Jira ticket reference in the title or description.
             * {{source.diff.files | filter(attr="original_file", regex=r/\.json$|\.md$/) | dump | safe}}
             Please add a Jira ticket reference to the title or description of this PR. {{changes.change_version}} - {{changes.change_version2}} - {{changes.change_readme}}
   # Post a comment that lists the best experts for the files that were modified.
@@ -85,7 +85,7 @@ colors:
   green: '0e8a16'
 
 changes:
-  change_version: {{source.diff.files | filter(atri='original_file', regex=r/\.json$|\.md$/) | map(atri='diff') | includes(list=['version'])}}
-  change_readme: {{source.diff.files | filter(atri='original_file', regex=r/README\.md/) | map(atri='diff') | includes(list=['version'])}}
-  change_vesion2: {{source.diff.files | filter(atri='original_file', regex=r/README\.md/) | map(atri='diff')}}
-  change_version3: {{source.diff.files | filter(atri='original_file', regex=r/pakage\.json/) | map(atri='diff') | includes(list=['version'])}}
+  change_version3: {{source.diff.files | filter(attr='original_file', regex=r/\.json$|\.md$/) | map(attr='diff') | includes(list=['version'])}}
+  change_readme: {{source.diff.files | filter(attr='original_file', regex=r/README\.md/) | map(attr='diff') | includes(list=['version'])}}
+  change_vesion2: {{source.diff.files | filter(attr='original_file', regex=r/README\.md/) | map(attr='diff')}}
+  change_version: {{source.diff.files | filter(attr='original_file', regex=r/pakage\.json/) | map(attr='diff') | includes(list=['version'])}}

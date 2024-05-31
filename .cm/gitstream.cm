@@ -71,3 +71,4 @@ colors:
 
 changes:
   change_version: {{source.diff.files | filter(atri='original_file', regex=r/pakage\.json/) | map(atri='diff') | includes(list=['version'])}}
+  change_readmi: {{source.diff.files | filter(atri='original_file', regex=r/README\.md/) | map(atri='diff') | includes(list=['version'])}}

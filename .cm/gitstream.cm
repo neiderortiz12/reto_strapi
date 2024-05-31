@@ -28,7 +28,7 @@ automations:
         args:
           comment: |
             This PR is missing a Jira ticket reference in the title or description.
-            Please add a Jira ticket reference to the title or description of this PR. {{change.change_version}} - {{change.change_readme}}
+            Please add a Jira ticket reference to the title or description of this PR. {{changes.change_version}} - {{changes.change_version2}} - {{changes.change_readme}}
   # Post a comment that lists the best experts for the files that were modified.
   explain_code_experts:
     if:
@@ -40,7 +40,7 @@ automations:
 
   change_version_validation:
     if:
-      - {{ not (changes.changes_version) }}
+      - {{ not (changes.change_version) }}
     run:
       - action: add-label@v1
         args:
@@ -54,7 +54,7 @@ automations:
 
   change_version_validation2:
     if:
-      - {{ not (changes.changes_readme) }}
+      - {{ not (changes.change_readme) }}
     run:
       - action: add-label@v1
         args:
@@ -86,3 +86,4 @@ colors:
 changes:
   change_version: {{source.diff.files | filter(atri='original_file', regex=r/pakage\.json/) | map(atri='diff') | includes(list=['version'])}}
   change_readme: {{source.diff.files | filter(atri='original_file', regex=r/README\.md/) | map(atri='diff') | includes(list=['version'])}}
+  change_vesion2: {{source.diff.files | filter(atri='original_file', regex=r/README\.md/) | map(atri='diff')}}

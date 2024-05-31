@@ -28,7 +28,7 @@ automations:
         args:
           comment: |
             This PR is missing a Jira ticket reference in the title or description.
-            Please add a Jira ticket reference to the title or description of this PR.
+            Please add a Jira ticket reference to the title or description of this PR. {{change.change_version}} - {{change.change_readme}}
   # Post a comment that lists the best experts for the files that were modified.
   explain_code_experts:
     if:

@@ -55,19 +55,19 @@ automations:
             In this PR the version is not updated,
             Please update version.
 
-  change_version_validation2:
-    if:
-      - {{ not (changes.change_readme) }}
-    run:
-      - action: add-label@v1
-        args:
-          label: "don't update version"
-          color: {{ colors.red }}
-      - action: add-comment@v1
-        args:
-          comment: |
-            In this PR the version is not updated,
-            Please update version.
+  #change_version_validation2:
+  #  if:
+  #    - {{ not (changes.change_readme) }}
+  #  run:
+  #    - action: add-label@v1
+  #      args:
+  #        label: "don't update version"
+  #        color: {{ colors.red }}
+  #    - action: add-comment@v1
+  #      args:
+  #        comment: |
+  #          In this PR the version is not updated,
+  #          Please update version.
 
 # +----------------------------------------------------------------------------+
 # | Custom Expressions                                                         |

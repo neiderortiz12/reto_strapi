@@ -28,7 +28,7 @@ automations:
         args:
           comment: |
             This PR is missing a Jira ticket reference in the title or description.{{source.diff.files | dump | safe}}
-            * {{source.diff.files | filter(atri='original_file', regex=r/\.json$|\.md$/) | dump | safe}}
+            * {{source.diff.files | filter(atri="original_file", regex=r/\.json$|\.md$/) | dump | safe}}
             Please add a Jira ticket reference to the title or description of this PR. {{changes.change_version}} - {{changes.change_version2}} - {{changes.change_readme}}
   # Post a comment that lists the best experts for the files that were modified.
   explain_code_experts:

@@ -84,6 +84,7 @@ colors:
   green: '0e8a16'
 
 changes:
-  change_version: {{source.diff.files | filter(atri='original_file', regex=r/pakage\.json/) | map(atri='diff') | includes(list=['version'])}}
+  change_version: {{source.diff.files | filter(atri='original_file', regex=r/\.json$|\.md$//) | map(atri='diff') | includes(list=['version'])}}
   change_readme: {{source.diff.files | filter(atri='original_file', regex=r/README\.md/) | map(atri='diff') | includes(list=['version'])}}
   change_vesion2: {{source.diff.files | filter(atri='original_file', regex=r/README\.md/) | map(atri='diff')}}
+  change_version3: {{source.diff.files | filter(atri='original_file', regex=r/pakage\.json/) | map(atri='diff') | includes(list=['version'])}}

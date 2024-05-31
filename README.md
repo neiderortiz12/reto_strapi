@@ -29,6 +29,8 @@ Lunes 6 de Mayo 11:59 p.m
 - `categorias`: Relación muchos a muchos con Categoría
 - `imagen_cabecera`: Media (permite cargar una imagen que será la cabecera del artículo)
 
+add gitstream
+
 ### Categoría
 - `nombre`: String (requerido)
 - `descripcion`: Text

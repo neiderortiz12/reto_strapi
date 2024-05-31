@@ -38,6 +38,19 @@ automations:
         args:
           gt: 10 
 
+  change_version_validation:
+    if:
+      - {{ not (changes.changes_version) }}
+    run:
+      - action: add-label@v1
+        args:
+          label: "don't update version"
+          color: {{ colors.red }}
+      - action: add-comment@v1
+        args:
+          comment: |
+            In this PR the version is not updated,
+            Please update version.
 
 # +----------------------------------------------------------------------------+
 # | Custom Expressions                                                         |
@@ -55,3 +68,6 @@ colors:
   red: 'b60205'
   yellow: 'fbca04'
   green: '0e8a16'
+
+changes:
+  change_version: {{source.diff.files | filter(atri='original_file', regex=r/pakage\.json/) | map(atri='diff') | includes(list=['version'])}}

@@ -99,5 +99,5 @@ changes:
 
 policies:
   branch_policy: {{branch.name | includes(regex=r/(feature|bug|hotfix)\/[a-zA-Z]*(\-|\_)[0-9]*/)}}
-  commit_policy: {{pr.title | includes(regex=r/\.{10}\s+[a-zA-Z0-9\-\_]*\:\s+.{0,50}/)}}
+  commit_policy: {{pr.title | includes(regex=r/\:[a-zA-Z0-9\-\_]*\:\s+[a-zA-Z0-9\-\_]*\:\s+.{0,50}/)}}
   

@@ -28,10 +28,11 @@ automations:
         args:
           comment: |
             This PR is missing a Jira ticket reference in the title or description.
-            xxx- {{source.diff.files | filter(attr="original_file", regex=r/package\.json$/) | dump | safe}}
-            xxx- {{source.diff.files | filter(attr='original_file', regex=r/package\.json$/) | map(attr='diff') | dump | safe}}
-            xxx- {{source.diff.files | filter(attr='original_file', regex=r/package\.json$/) | map(attr='diff') | includes(regex=r/\+[\s]*[\",\']*[\s]*version/) | dump | safe}}
-            Please add a Jira ticket reference to the title or description of this PR. {{changes.change_version}} - {{changes.change_version2}} - {{changes.change_readme}}
+            #xxx- {{source.diff.files | filter(attr="original_file", regex=r/package\.json$/) | dump | safe}}
+            #xxx- {{source.diff.files | filter(attr='original_file', regex=r/package\.json$/) | map(attr='diff') | dump | safe}}
+            #xxx- {{source.diff.files | filter(attr='original_file', regex=r/package\.json$/) | map(attr='diff') | includes(regex=r/\+[\s]*[\",\']*[\s]*version/) | dump | safe}}
+            #Please add a Jira ticket reference to the title or description of this PR. {{changes.change_version}} - {{changes.change_version2}} - {{changes.change_readme}}
+            datos {{branch.name}} - {{pr.title}} - {{policies.branch_policy}} - {{policies.commit_policy}}
   # Post a comment that lists the best experts for the files that were modified.
   explain_code_experts:
     if:
@@ -91,3 +92,8 @@ changes:
   change_readme: {{source.diff.files | filter(atri='original_file', regex=r/README\.md/) | map(attr='diff') | includes(list=['version'])}}
   #change_vesion2: {{source.diff.files | filter(atri='original_file', regex=r/README\.md/) | map(attr='diff')}}
   change_version: {{source.diff.files | filter(attr='original_file', regex=r/package\.json$/) | map(attr='diff') | includes(regex=r/\+[\s]*[\",\']*[\s]*version/)}}
+
+policies:
+  branch_policy: {{branch.name | includes(regex=r/(feature|bug|hotfix)\/[a-zA-Z]*(\-|\_)[0-9]*/)}}
+  commit_policy: {{pr.title | includes(regex=r/\:[a-zA-Z0-9\-\_]*\:\s+[a-zA-Z0-9\-\_]*\:\s+.{0,50}/)}}
+  

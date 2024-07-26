@@ -60,6 +60,24 @@ automations:
             In this PR the version is not updated,
             Please update version.
 
+   validation_branch_policy:
+    if:
+      - {{ not (policies.branch_policy) }}
+    run:
+      - action: add-comment@v1
+        args:
+          comment: |
+            Puede ser que la rama que estas intentado mezclar no cumpla con la politica de branch de ADL.
+
+   validation_commit_policy:
+    if:
+      - {{ not (policies.commit_policy) }}
+    run:
+      - action: add-comment@v1
+        args:
+          comment: |
+            Puede ser que el nombre del Pull Request no cumpla con el estandar para commits de ADL.
+
   #change_version_validation2:
   #  if:
   #    - {{ not (changes.change_readme) }}

@@ -67,7 +67,7 @@ automations:
       - action: add-comment@v1
         args:
           comment: |
-            Puede ser que la rama que estas intentado mezclar no cumpla con la politica de branch de ADL.
+            It may be that the branch you are trying to merge does not comply with the ADL branch policy.
 
   validation_commit_policy:
     if:
@@ -76,7 +76,7 @@ automations:
       - action: add-comment@v1
         args:
           comment: |
-            Puede ser que el nombre del Pull Request no cumpla con el estandar para commits de ADL.
+            It may be that the name of the Pull Request does not comply with the ADL commit standard.
 
   #change_version_validation2:
   #  if:
